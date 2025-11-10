@@ -1,0 +1,115 @@
+---
+import NavDropdown from './NavDropdown.astro';
+import MobileMenu from './MobileMenu.astro';
+
+const menuItems = [
+  { label: 'Tentang', hasDropdown: true, items: ['Sejarah', 'Profil', 'Tugas Fungsi', 'Visi Misi', 'Struktur Organisasi', 'Akreditasi', 'Lokasi'], isActive: true },
+  { label: 'Pendidikan', hasDropdown: true, items: [] },
+  { label: 'Pusat', hasDropdown: true, items: [] },
+  { label: 'Pelayanan Publik', hasDropdown: true, items: [] },
+  { label: 'Mahasiswa & Alumni', hasDropdown: true, items: [] },
+  { label: 'SPMB', hasDropdown: true, items: [] },
+  { label: 'Sistem Informasi', hasDropdown: false, items: [] },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-white h-header-height shadow-md">
+  <div class="container mx-auto h-full px-8">
+    <nav class="flex items-center justify-between h-full">
+      <!-- Logo Section -->
+      <div class="flex items-center gap-3">
+        <!-- Logo Icon -->
+        <div class="w-12 h-12 flex items-center justify-center flex-shrink-0">
+          <img
+            src="/icon.png"
+            alt="Poltekkes Yogyakarta Logo"
+            class="w-full h-full object-contain"
+            width="48"
+            height="48"
+          />
+        </div>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="open-mobile-menu"
+        class="lg:hidden text-gray-800 hover:text-accent transition-colors p-2"
+        aria-label="Open menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Navigation Section -->
+      <div class="hidden lg:flex items-center gap-8">
+        <!-- BLU Logo -->
+        <div class="w-10 h-10 rounded-full bg-primary border-2 border-primary flex items-center justify-center flex-shrink-0">
+          <span class="text-xs font-bold text-white">BLU</span>
+        </div>
+
+        <!-- Menu Items -->
+        <div class="flex items-center gap-6">
+          {menuItems.map((item) => (
+            item.hasDropdown && item.items.length > 0 ? (
+              <NavDropdown label={item.label} items={item.items} isActive={item.isActive} />
+            ) : (
+              <a
+                href={`#${item.label.toLowerCase().replace(/\s+/g, '-')}`}
+                class={`
+                  flex items-center gap-1 text-menu font-medium transition-colors duration-200
+                  ${item.isActive ? 'text-accent' : 'text-gray-800'}
+                  hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-white
+                `}
+              >
+                <span>{item.label}</span>
+                {item.hasDropdown && (
+                  <svg
+                    class="w-4 h-4 text-gray-800"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                )}
+              </a>
+            )
+          ))}
+        </div>
+
+        <!-- Search Icon -->
+        <button
+          class="text-gray-800 hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-white rounded p-1 ml-2"
+          aria-label="Search"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+
+        <!-- Language Selector -->
+        <div class="flex items-center gap-2 ml-4">
+          <!-- Bendera Merah Putih -->
+          <div class="w-5 h-4 flex flex-col overflow-hidden rounded-sm shadow-sm">
+            <div class="h-1/2 bg-red-600"></div>
+            <div class="h-1/2 bg-white"></div>
+          </div>
+          <span class="text-menu font-medium text-gray-800">ID</span>
+          <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <MobileMenu menuItems={menuItems} />
+</header>
+
+<style>
+  header {
+    height: 80px;
+  }
+</style>
+

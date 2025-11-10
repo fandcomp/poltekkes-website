@@ -1,0 +1,27 @@
+---
+import Header from '../components/Header.astro';
+import HeroSlider from '../components/HeroSlider.astro';
+import Chatbot from '../components/Chatbot.astro';
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Poltekkes Yogyakarta - Website Resmi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/icon.png" />
+    <link rel="apple-touch-icon" href="/icon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Poltekkes Yogyakarta - Website Resmi</title>
+  </head>
+  <body class="bg-white">
+    <Header />
+    <main>
+      <HeroSlider />
+    </main>
+    <Chatbot />
+  </body>
+</html>
+

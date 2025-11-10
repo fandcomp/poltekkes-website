@@ -1,0 +1,114 @@
+---
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/effect-fade';
+---
+
+<div class="relative w-full h-screen mt-header-height">
+  <div class="swiper hero-swiper h-full">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="relative w-full h-full">
+          <!-- Hero Image Full Width -->
+          <div class="relative w-full h-full overflow-hidden">
+            <img
+              src="/hero-bg.jpg"
+              alt="Hero Image"
+              class="w-full h-full object-cover"
+              loading="eager"
+            />
+          </div>
+
+          <!-- Slider Navigation Arrow -->
+          <div class="absolute right-8 top-1/2 -translate-y-1/2 z-30">
+            <button
+              class="swiper-button-next-custom text-text-light hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent rounded p-2 bg-black/20 backdrop-blur-sm"
+              aria-label="Next slide"
+            >
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Previous Arrow -->
+          <div class="absolute left-8 top-1/2 -translate-y-1/2 z-30">
+            <button
+              class="swiper-button-prev-custom text-text-light hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent rounded p-2 bg-black/20 backdrop-blur-sm"
+              aria-label="Previous slide"
+            >
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import Swiper from 'swiper';
+  import { Navigation, Autoplay, EffectFade } from 'swiper/modules';
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('load', () => {
+      const swiperEl = document.querySelector('.hero-swiper');
+      if (swiperEl) {
+        const swiper = new Swiper(swiperEl, {
+          modules: [Navigation, Autoplay, EffectFade],
+          spaceBetween: 0,
+          slidesPerView: 1,
+          effect: 'fade',
+          fadeEffect: {
+            crossFade: true
+          },
+          autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+          },
+          speed: 800,
+          loop: true,
+          navigation: {
+            nextEl: '.swiper-button-next-custom',
+            prevEl: '.swiper-button-prev-custom',
+          },
+        });
+      }
+    });
+  }
+</script>
+
+<style>
+
+  :global(.swiper-button-next-custom),
+  :global(.swiper-button-prev-custom) {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  :global(.swiper-button-next-custom) {
+    right: 32px;
+  }
+
+  :global(.swiper-button-prev-custom) {
+    left: 32px;
+  }
+
+  :global(.swiper) {
+    width: 100%;
+    height: 100%;
+  }
+
+  :global(.swiper-slide) {
+    width: 100%;
+    height: 100%;
+  }
+</style>

@@ -1,0 +1,92 @@
+---
+interface Props {
+  menuItems: Array<{
+    label: string;
+    hasDropdown: boolean;
+    items: string[];
+    isActive?: boolean;
+  }>;
+}
+
+const { menuItems } = Astro.props;
+---
+
+<div class="lg:hidden fixed inset-0 z-50 bg-bg-header transform translate-x-full transition-transform duration-300" id="mobile-menu">
+  <div class="flex flex-col h-full">
+    <!-- Mobile Menu Header -->
+    <div class="flex items-center justify-between p-4 border-b border-white/20">
+      <div class="flex items-center gap-2">
+        <div class="w-10 h-10 flex items-center justify-center flex-shrink-0">
+          <img
+            src="/icon.png"
+            alt="Poltekkes Yogyakarta Logo"
+            class="w-full h-full object-contain"
+            width="40"
+            height="40"
+          />
+        </div>
+      </div>
+      <button
+        class="text-text-light hover:text-accent transition-colors p-2"
+        id="close-mobile-menu"
+        aria-label="Close menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu Items -->
+    <nav class="flex-1 overflow-y-auto p-4">
+      {menuItems.map((item) => (
+        <div class="mb-2">
+          {item.hasDropdown && item.items.length > 0 ? (
+            <details class="group">
+              <summary class="flex items-center justify-between p-3 text-text-light font-medium cursor-pointer hover:text-accent transition-colors">
+                <span>{item.label}</span>
+                <svg class="w-4 h-4 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div class="pl-4 mt-2 space-y-1">
+                {item.items.map((subItem) => (
+                  <a
+                    href={`#${subItem.toLowerCase().replace(/\s+/g, '-')}`}
+                    class="block p-2 text-text-light/80 hover:text-accent transition-colors"
+                  >
+                    {subItem}
+                  </a>
+                ))}
+              </div>
+            </details>
+          ) : (
+            <a
+              href={`#${item.label.toLowerCase().replace(/\s+/g, '-')}`}
+              class="block p-3 text-text-light font-medium hover:text-accent transition-colors"
+            >
+              {item.label}
+            </a>
+          )}
+        </div>
+      ))}
+    </nav>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const openMenuBtn = document.getElementById('open-mobile-menu');
+    const closeMenuBtn = document.getElementById('close-mobile-menu');
+
+    openMenuBtn?.addEventListener('click', () => {
+      mobileMenu?.classList.remove('translate-x-full');
+    });
+
+    closeMenuBtn?.addEventListener('click', () => {
+      mobileMenu?.classList.add('translate-x-full');
+    });
+  });
+</script>
+
