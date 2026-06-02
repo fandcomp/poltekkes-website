@@ -5,48 +5,37 @@ import '../styles/global.css';
 ---
 
 <style>
-  .chatbot-widget {
+  .chatbot-bubble {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 380px;
-    height: 600px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #00796B;
     border: none;
-    border-radius: 8px;
-    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    cursor: pointer;
     z-index: 2147483647;
-    display: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: transform 0.2s ease;
   }
 
-  .chatbot-widget.loaded {
-    display: block;
-  }
-
-  @media (max-width: 600px) {
-    .chatbot-widget {
-      width: calc(100% - 20px);
-      height: 500px;
-      right: 10px;
-      bottom: 10px;
-    }
+  .chatbot-bubble:hover {
+    transform: scale(1.1);
   }
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const iframe = document.querySelector('.chatbot-widget');
-    if (iframe) {
-      iframe.addEventListener('load', () => {
-        iframe.classList.add('loaded');
+    const button = document.querySelector('.chatbot-bubble');
+    if (button) {
+      button.addEventListener('click', () => {
+        window.open('https://hobby-dresses-resort-miami.trycloudflare.com/', '_blank', 'width=800,height=700');
       });
-      iframe.addEventListener('error', () => {
-        console.error('Failed to load chatbot');
-      });
-      setTimeout(() => {
-        if (!iframe.classList.contains('loaded')) {
-          iframe.classList.add('loaded');
-        }
-      }, 3000);
     }
   });
 </script>
@@ -67,7 +56,7 @@ import '../styles/global.css';
     <main>
       <HeroSlider />
     </main>
-    <iframe class="chatbot-widget" src="https://hobby-dresses-resort-miami.trycloudflare.com/" title="VirtualAssist Chatbot"></iframe>
+    <button class="chatbot-bubble" title="Chat dengan kami" aria-label="Buka chat">💬</button>
   </body>
 </html>
 
