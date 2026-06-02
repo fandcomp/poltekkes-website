@@ -4,7 +4,31 @@ import HeroSlider from '../components/HeroSlider.astro';
 import '../styles/global.css';
 ---
 
-<script is:inline src="https://hobby-dresses-resort-miami.trycloudflare.com/widget.js"></script>
+<style>
+  .chatbot-container {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2147483647;
+  }
+
+  .chatbot-container iframe {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    pointer-events: auto;
+  }
+</style>
+
+<div class="chatbot-container">
+  <iframe src="https://hobby-dresses-resort-miami.trycloudflare.com/demo.html" title="VirtualAssist Chatbot"></iframe>
+</div>
 
 <!DOCTYPE html>
 <html lang="id">
