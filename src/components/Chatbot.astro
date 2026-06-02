@@ -5,8 +5,18 @@
 
 <script is:inline>
   window.PoltekkesChat = {
-    apiBase:  'https://hobby-dresses-resort-miami.trycloudflare.com',
-    autoOpen: false,
+    apiBase: 'https://hobby-dresses-resort-miami.trycloudflare.com',
+    autoOpen: false
   };
+  (function(){
+    try {
+      const base = window.PoltekkesChat.apiBase.replace(/\/$/, '');
+      const s = document.createElement('script');
+      s.defer = true;
+      s.src = base + '/widget/chat-widget.js';
+      document.head.appendChild(s);
+    } catch (e) {
+      console.error('Failed to load chat widget script', e);
+    }
+  })();
 </script>
-<script is:inline src="https://hobby-dresses-resort-miami.trycloudflare.com/widget/chat-widget.js"></script>
