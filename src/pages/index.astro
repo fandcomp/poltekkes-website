@@ -14,11 +14,10 @@ import '../styles/global.css';
     <link rel="apple-touch-icon" href="/icon.png" />
     <meta name="generator" content={Astro.generator} />
     <title>Poltekkes Yogyakarta - Website Resmi</title>
-    <script>
+    <script is:inline>
       window.PoltekkesChat = { apiBase: 'https://element-welcome-hash-kathy.trycloudflare.com', autoOpen: false };
-      console.log('PoltekkesChat config loaded:', window.PoltekkesChat);
     </script>
-    <script src="https://element-welcome-hash-kathy.trycloudflare.com/widget.js" async onload="console.log('Widget loaded successfully');" onerror="console.error('Widget failed to load');"></script>
+    <script is:inline src="https://element-welcome-hash-kathy.trycloudflare.com/widget.js" async></script>
   </head>
   <body class="bg-white">
     <Header />
