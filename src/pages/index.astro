@@ -4,6 +4,20 @@ import HeroSlider from '../components/HeroSlider.astro';
 import '../styles/global.css';
 ---
 
+<style>
+  .chatbot-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 380px;
+    height: 600px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    z-index: 2147483647;
+  }
+</style>
+
 <!DOCTYPE html>
 <html lang="id">
   <head>
@@ -20,6 +34,7 @@ import '../styles/global.css';
     <main>
       <HeroSlider />
     </main>
+    <iframe class="chatbot-widget" src="https://hobby-dresses-resort-miami.trycloudflare.com/demo.html" title="VirtualAssist Chatbot"></iframe>
   </body>
 </html>
 
