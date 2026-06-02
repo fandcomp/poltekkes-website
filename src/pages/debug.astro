@@ -1,0 +1,57 @@
+---
+---
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Widget</title>
+</head>
+<body style="margin: 0; padding: 20px; font-family: monospace; background: #1a1a1a; color: #0f0;">
+    <h1 style="color: #0f0;">🔍 Widget Debug</h1>
+    <div id="log" style="max-height: 400px; overflow-y: auto; background: #000; padding: 10px; border: 1px solid #0f0; margin: 10px 0;"></div>
+
+    <script is:inline>
+        const log = (msg) => {
+            const el = document.getElementById('log');
+            console.log(msg);
+            if (el) el.innerHTML += msg + '<br>';
+        };
+
+        log('[1] Page started');
+        window.PoltekkesChat = {
+            apiBase: 'https://element-welcome-hash-kathy.trycloudflare.com',
+            autoOpen: false
+        };
+        log('[2] Config: ' + JSON.stringify(window.PoltekkesChat));
+    </script>
+
+    <script is:inline src="https://element-welcome-hash-kathy.trycloudflare.com/widget.js" async></script>
+
+    <script is:inline>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const log = (msg) => {
+                    const el = document.getElementById('log');
+                    console.log(msg);
+                    if (el) el.innerHTML += msg + '<br>';
+                };
+                
+                log('[3] Window loaded');
+                log('✓ body: ' + (document.body ? 'OK' : 'FAIL'));
+                log('✓ pkcw-root: ' + (document.getElementById('pkcw-root') ? 'FOUND ✓' : 'MISSING ✗'));
+                log('✓ .cw-wrap: ' + (document.querySelector('.cw-wrap') ? 'FOUND ✓' : 'MISSING ✗'));
+                log('✓ .cw-launcher: ' + (document.querySelector('.cw-launcher') ? 'FOUND ✓' : 'MISSING ✗'));
+                log('✓ __PkChatWidgetLoaded: ' + (window.__PkChatWidgetLoaded ? 'YES' : 'NO'));
+                log('✓ API accessible: checking...');
+                
+                fetch('https://element-welcome-hash-kathy.trycloudflare.com/api/health')
+                    .then(r => r.json())
+                    .then(d => log('✓ API health: ' + JSON.stringify(d.status)))
+                    .catch(e => log('✗ API error: ' + e.message));
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
