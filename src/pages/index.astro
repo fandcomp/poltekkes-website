@@ -4,69 +4,7 @@ import HeroSlider from '../components/HeroSlider.astro';
 import '../styles/global.css';
 ---
 
-<style>
-  .chatbot-toggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: #00796B;
-    border: none;
-    cursor: pointer;
-    z-index: 9999;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    transition: transform 0.2s ease;
-  }
-
-  .chatbot-toggle:hover {
-    transform: scale(1.1);
-  }
-
-  .chatbot-widget {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    width: 380px;
-    height: 600px;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
-    z-index: 9998;
-    display: none;
-  }
-
-  .chatbot-widget.active {
-    display: block;
-  }
-
-  @media (max-width: 600px) {
-    .chatbot-widget {
-      width: calc(100% - 40px);
-      height: 500px;
-      right: 20px;
-      bottom: 80px;
-    }
-  }
-</style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const toggle = document.querySelector('.chatbot-toggle');
-    const widget = document.querySelector('.chatbot-widget');
-
-    if (toggle && widget) {
-      toggle.addEventListener('click', () => {
-        widget.classList.toggle('active');
-      });
-    }
-  });
-</script>
+<script is:inline src="https://hobby-dresses-resort-miami.trycloudflare.com/widget.js"></script>
 
 <!DOCTYPE html>
 <html lang="id">
@@ -84,8 +22,6 @@ import '../styles/global.css';
     <main>
       <HeroSlider />
     </main>
-    <button class="chatbot-toggle" title="Chat dengan kami" aria-label="Buka chat">💬</button>
-    <iframe class="chatbot-widget" src="https://hobby-dresses-resort-miami.trycloudflare.com/" title="VirtualAssist Chatbot"></iframe>
   </body>
 </html>
 
