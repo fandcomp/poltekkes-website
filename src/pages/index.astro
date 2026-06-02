@@ -15,9 +15,10 @@ import '../styles/global.css';
     <meta name="generator" content={Astro.generator} />
     <title>Poltekkes Yogyakarta - Website Resmi</title>
     <script>
-      window.PoltekkesChat = { apiBase: 'https://element-welcome-hash-kathy.trycloudflare.com' };
+      window.PoltekkesChat = { apiBase: 'https://element-welcome-hash-kathy.trycloudflare.com', autoOpen: false };
+      console.log('PoltekkesChat config loaded:', window.PoltekkesChat);
     </script>
-    <script src='https://element-welcome-hash-kathy.trycloudflare.com/widget.js' async></script>
+    <script src="https://element-welcome-hash-kathy.trycloudflare.com/widget.js" async onload="console.log('Widget loaded successfully');" onerror="console.error('Widget failed to load');"></script>
   </head>
   <body class="bg-white">
     <Header />
