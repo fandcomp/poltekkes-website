@@ -1,0 +1,86 @@
+---
+---
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Widget Test - No Astro</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: sans-serif; background: #f0f0f0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { margin-bottom: 20px; color: #333; }
+        .box { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .log { background: #1a1a1a; color: #0f0; padding: 15px; border-radius: 4px; font-family: monospace; font-size: 12px; max-height: 300px; overflow-y: auto; }
+        .log-entry { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Simple Widget Test</h1>
+        <div class="box">
+            <h2>Expected: Green bubble button at bottom-right</h2>
+            <p>Check console and log below for debug info</p>
+        </div>
+        <div class="box">
+            <h3>Debug Log:</h3>
+            <div class="log" id="log"></div>
+        </div>
+    </div>
+
+    <script is:inline>
+        function log(msg) {
+            console.log(msg);
+            const el = document.getElementById('log');
+            if (el) {
+                const entry = document.createElement('div');
+                entry.className = 'log-entry';
+                entry.textContent = msg;
+                el.appendChild(entry);
+                el.scrollTop = el.scrollHeight;
+            }
+        }
+
+        log('1️⃣  Page started');
+
+        // Set widget config BEFORE loading widget.js
+        window.PoltekkesChat = {
+            apiBase: 'https://element-welcome-hash-kathy.trycloudflare.com',
+            autoOpen: false
+        };
+        log('2️⃣  Config set: apiBase = ' + window.PoltekkesChat.apiBase);
+        log('3️⃣  Loading widget.js...');
+    </script>
+
+    <!-- Load widget.js -->
+    <script is:inline src="https://element-welcome-hash-kathy.trycloudflare.com/widget.js" async></script>
+
+    <script is:inline>
+        // Check after widget loads
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                log('4️⃣  Window load event fired');
+
+                const root = document.getElementById('pkcw-root');
+                const launcher = document.querySelector('.cw-launcher');
+                const wrap = document.querySelector('.cw-wrap');
+
+                log('   ✓ pkcw-root: ' + (root ? '✅ FOUND' : '❌ NOT FOUND'));
+                log('   ✓ .cw-launcher: ' + (launcher ? '✅ FOUND' : '❌ NOT FOUND'));
+                log('   ✓ .cw-wrap: ' + (wrap ? '✅ FOUND' : '❌ NOT FOUND'));
+                log('   ✓ __PkChatWidgetLoaded: ' + (window.__PkChatWidgetLoaded ? '✅ YES' : '❌ NO'));
+
+                if (!root && !launcher && !wrap) {
+                    log('❌ PROBLEM: Widget DOM not created!');
+                    log('   Check: Config = ' + JSON.stringify(window.PoltekkesChat));
+                    log('   Check: Body exists = ' + (document.body ? 'YES' : 'NO'));
+                } else {
+                    log('✅ Widget is present in DOM');
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>

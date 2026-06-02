@@ -22,12 +22,41 @@ import '../styles/global.css';
     </main>
 
     <script is:inline>
+      // Set config IMMEDIATELY
       window.PoltekkesChat = {
         apiBase: 'https://element-welcome-hash-kathy.trycloudflare.com',
         autoOpen: false
       };
+
+      // Ensure widget loads AFTER body is ready
+      function loadWidget() {
+        if (!document.body) {
+          setTimeout(loadWidget, 10);
+          return;
+        }
+
+        const script = document.createElement('script');
+        script.src = 'https://element-welcome-hash-kathy.trycloudflare.com/widget.js';
+        script.async = true;
+        script.onload = function() {
+          console.log('✓ Widget loaded successfully');
+          setTimeout(function() {
+            console.log('✓ Launcher visible:', !!document.querySelector('.cw-launcher'));
+          }, 200);
+        };
+        script.onerror = function() {
+          console.error('✗ Failed to load widget');
+        };
+        document.body.appendChild(script);
+      }
+
+      // Load when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadWidget);
+      } else {
+        loadWidget();
+      }
     </script>
-    <script is:inline src="https://element-welcome-hash-kathy.trycloudflare.com/widget.js" async></script>
   </body>
 </html>
 
