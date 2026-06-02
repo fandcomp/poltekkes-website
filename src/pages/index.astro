@@ -15,8 +15,41 @@ import '../styles/global.css';
     border-radius: 8px;
     box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
     z-index: 2147483647;
+    display: none;
+  }
+
+  .chatbot-widget.loaded {
+    display: block;
+  }
+
+  @media (max-width: 600px) {
+    .chatbot-widget {
+      width: calc(100% - 20px);
+      height: 500px;
+      right: 10px;
+      bottom: 10px;
+    }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const iframe = document.querySelector('.chatbot-widget');
+    if (iframe) {
+      iframe.addEventListener('load', () => {
+        iframe.classList.add('loaded');
+      });
+      iframe.addEventListener('error', () => {
+        console.error('Failed to load chatbot');
+      });
+      setTimeout(() => {
+        if (!iframe.classList.contains('loaded')) {
+          iframe.classList.add('loaded');
+        }
+      }, 3000);
+    }
+  });
+</script>
 
 <!DOCTYPE html>
 <html lang="id">
