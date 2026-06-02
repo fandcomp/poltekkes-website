@@ -5,7 +5,7 @@ import '../styles/global.css';
 ---
 
 <style>
-  .chatbot-bubble {
+  .chatbot-toggle {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -15,7 +15,7 @@ import '../styles/global.css';
     background: #00796B;
     border: none;
     cursor: pointer;
-    z-index: 2147483647;
+    z-index: 9999;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     display: flex;
     align-items: center;
@@ -24,17 +24,45 @@ import '../styles/global.css';
     transition: transform 0.2s ease;
   }
 
-  .chatbot-bubble:hover {
+  .chatbot-toggle:hover {
     transform: scale(1.1);
+  }
+
+  .chatbot-widget {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 380px;
+    height: 600px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    z-index: 9998;
+    display: none;
+  }
+
+  .chatbot-widget.active {
+    display: block;
+  }
+
+  @media (max-width: 600px) {
+    .chatbot-widget {
+      width: calc(100% - 40px);
+      height: 500px;
+      right: 20px;
+      bottom: 80px;
+    }
   }
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const button = document.querySelector('.chatbot-bubble');
-    if (button) {
-      button.addEventListener('click', () => {
-        window.open('https://hobby-dresses-resort-miami.trycloudflare.com/', '_blank', 'width=800,height=700');
+    const toggle = document.querySelector('.chatbot-toggle');
+    const widget = document.querySelector('.chatbot-widget');
+
+    if (toggle && widget) {
+      toggle.addEventListener('click', () => {
+        widget.classList.toggle('active');
       });
     }
   });
@@ -56,7 +84,8 @@ import '../styles/global.css';
     <main>
       <HeroSlider />
     </main>
-    <button class="chatbot-bubble" title="Chat dengan kami" aria-label="Buka chat">💬</button>
+    <button class="chatbot-toggle" title="Chat dengan kami" aria-label="Buka chat">💬</button>
+    <iframe class="chatbot-widget" src="https://hobby-dresses-resort-miami.trycloudflare.com/" title="VirtualAssist Chatbot"></iframe>
   </body>
 </html>
 
