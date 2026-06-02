@@ -4,14 +4,6 @@ import HeroSlider from '../components/HeroSlider.astro';
 import '../styles/global.css';
 ---
 
-<script>
-  window.PoltekkesChat = {
-    apiBase: 'https://section-according-enjoying-donations.trycloudflare.com',
-    autoOpen: false,
-  };
-</script>
-<script src="https://section-according-enjoying-donations.trycloudflare.com/widget/chat-widget.js" async></script>
-
 <!DOCTYPE html>
 <html lang="id">
   <head>
@@ -22,6 +14,13 @@ import '../styles/global.css';
     <link rel="apple-touch-icon" href="/icon.png" />
     <meta name="generator" content={Astro.generator} />
     <title>Poltekkes Yogyakarta - Website Resmi</title>
+    <script>
+      window.PoltekkesChat = {
+        apiBase: 'https://section-according-enjoying-donations.trycloudflare.com',
+        autoOpen: false,
+      };
+    </script>
+    <script src="https://section-according-enjoying-donations.trycloudflare.com/widget/chat-widget.js" async></script>
   </head>
   <body class="bg-white">
     <Header />
